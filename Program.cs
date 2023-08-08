@@ -21,9 +21,11 @@ IEnumerable<string> FindFiles(string folderName)
 
 var currentDirectory = Directory.GetCurrentDirectory();
 var storesDirectory = Path.Combine(currentDirectory, "stores");
+
+var salesTotalDir = Path.Combine(currentDirectory, "salesTotalDir");
+Directory.CreateDirectory(salesTotalDir); // creates the directory if it doesn't exist
+
 var salesFiles = FindFiles(storesDirectory);
 
-foreach (var file in salesFiles)
-{
-    Console.WriteLine(file);
-}
+File.WriteAllText(Path.Combine(salesTotalDir, "totals.txt"), String.Empty); 
+
