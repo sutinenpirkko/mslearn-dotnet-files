@@ -9,7 +9,8 @@ IEnumerable<string> FindFiles(string folderName)
 
     foreach (var currentFile in foundFiles)
     {
-        if (currentFile.EndsWith("sales.json"))
+        var extension = Path.GetExtension(currentFile);
+        if (extension == ".json")
         {
             salesFiles.Add(currentFile);
         }
@@ -18,7 +19,9 @@ IEnumerable<string> FindFiles(string folderName)
     return salesFiles;
 }
 
-var salesFiles = FindFiles("stores");
+var currentDirectory = Directory.GetCurrentDirectory();
+var storesDirectory = Path.Combine(currentDirectory, "stores");
+var salesFiles = FindFiles(storesDirectory);
 
 foreach (var file in salesFiles)
 {
